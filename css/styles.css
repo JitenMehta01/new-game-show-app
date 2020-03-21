@@ -117,6 +117,7 @@ button {
   background: #FFFFFF;
   border-radius: 5px;
   font-size: var(--font-size-medium);
+  cursor:pointer;
 }
 
 /* Overlay */
@@ -132,7 +133,20 @@ button {
   left: 0;
   right: 0;
   border-radius: 5px;
+  transition: all 1.5s;
+  transform:scale3d(1, 1, 1);
 }
+
+#overlay h2 {
+  opacity: 1;
+  transition: all .4s;
+}
+
+#overlay a {
+  opacity: 1;
+  transition: all .4s;
+}
+
 
 .title {
   color: #FFF;
