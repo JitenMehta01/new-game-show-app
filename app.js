@@ -6,11 +6,6 @@ const startScreenOverlayHeading = document.querySelector('#overlay h2');
 const phraseUL = document.querySelector('#phrase ul');
 let letterMissed = 0;
 const playerTry = document.querySelectorAll('#scoreboard ol li');
-
-
-
-let missed = 0;
-
 const startGameButton = document.querySelector('#overlay a');
 
 
@@ -87,21 +82,55 @@ const checkWin = () =>{
   if (letter.length === lishow.length){
     startScreenOverlay.className = 'win';
     heading.textContent = 'Well Done. You\'ve guessed the correct Phrase';
-    startScreenOverlay.querySelector('a').textContent = 'Play Again';
+    startGameButton.textContent = 'Play Again';
     startScreenOverlay.style.display = 'flex';
 
 
   } else if (letterMissed >= 5) {
     startScreenOverlay.className = 'lose';
-    heading.textContent = 'Oh no! You\'ve ran out of geusses. Press the reset button to try again';
-    startScreenOverlay.querySelector('a').textContent = 'Play Again';
+    heading.textContent = 'Oh no! You\'ve ran out of guesses. Press the reset button to try again';
+    startGameButton.textContent = 'Play Again';
     startScreenOverlay.style.display = 'flex';
   }
+  reset();
+}
+
+// rest the Game
+
+
+const reset = () =>{
+  startScreenOverlay.addEventListener('click', (e) => {
+      if (e.target.textContent === 'Play Again'){
+        const phraseremove = phraseUL.querySelectorAll('li');
+        for(let i =0; i < phraseremove.length; i++){
+          phraseUL.removeChild(phraseremove[i]);
+        }
+
+        phraseUL.innerHTML = '';
+        const randomPhrase = getRandomPhraseAsArray(phrases);
+        addPhraseToDisplay(randomPhrase);
+        letterMissed = 0;
+        for(let i =0; i < playerTry.length; i++){
+          playerTry[i].firstElementChild.src = 'images/liveHeart.png';
+        }
+        const keys = keyboardContainer.getElementsByTagName('button');
+        for (let i =0; i < keys.length; i++){
+          keys[i].className = '';
+          keys[i].disabled = '';
+        }
+        startScreenOverlay.className = '';
+
+      }
+  });
 }
 
 keyboardContainer.addEventListener('click', (e) => {
-  if (e.target.tagName === 'BUTTON') {
-    e.target.classList.add('chosen');
+  const button = e.target
+  if (button.tagName === 'BUTTON') {
+    button.classList.add('chosen');
+    if(button.className = 'chosen'){
+      button.disabled = 'true';
+    }
     const letterFound  = checkLetter(e.target);
     if (letterFound === null){
       letterMissed += 1;
