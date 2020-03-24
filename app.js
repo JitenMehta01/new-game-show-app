@@ -35,18 +35,20 @@ return arr[randomNum].split('');
 
 // function that appends the characters of a phrase as a list item in a UL
 
-const addPhraseToDisplay = (arr) =>{
-  for (let i=0; i < arr.length; i++){
-    let li = document.createElement('li');
-    li.innerHTML = randomPhrase[i];
-    if (li.textContent !== " "){
-      li.className = "letter";
-    }
-    else{
-      li.classList.add('space');
-    }
-    phraseUL.append(li);
-}
+
+const addPhraseToDisplay = (arr) => {
+	const phrase = getRandomPhraseAsArray(phrases);
+	for (let i = 0; i < arr.length; i++) {
+		let li = document.createElement('li');
+		li.innerHTML = phrase[i];
+		if (li.textContent !== " ") {
+			li.className = "letter";
+		}
+		else {
+			li.classList.add('space');
+		}
+		phraseUL.append(li);
+	}
 }
 
 // const randomPhrase = getRandomPhraseAsArray(phrases);
