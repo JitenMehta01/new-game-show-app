@@ -22,8 +22,21 @@ const phrases = ['In a pickle',
 
 // Start Game button slide left effect
 
-startGameButton.addEventListener('click', () =>{
-  startScreenOverlay.style.display = 'none';
+startGameButton.addEventListener('click', (e) =>{
+  if (startScreenOverlay.className = 'start'){
+    startGameButton.style.opacity = '0';
+    startScreenOverlayHeading.style.opacity = '0'
+    setTimeout(function(){
+      startScreenOverlay.style.height = '0vh';; }
+      , 500);
+  }
+  else if (startScreenOverlay.className = 'lose') {
+    startGameButton.style.opacity = '1';
+    startScreenOverlayHeading.style.opacity = '1'
+    setTimeout(function(){
+      startScreenOverlay.style.height = '100vh'; }
+      , 500);
+  }
 });
 
 // function that Generats a random phrase and then splits the lettes randomly
