@@ -40,7 +40,7 @@ const addPhraseToDisplay = (arr) => {
 	const phrase = getRandomPhraseAsArray(phrases);
 	for (let i = 0; i < arr.length; i++) {
 		let li = document.createElement('li');
-		li.innerHTML = phrase[i];
+		li.innerHTML = arr[i];
 		if (li.textContent !== " ") {
 			li.className = "letter";
 		}
