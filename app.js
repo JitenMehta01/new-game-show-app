@@ -87,11 +87,14 @@ const checkWin = () =>{
   if (letter.length === lishow.length){
     startScreenOverlay.className = 'win';
     heading.textContent = 'Well Done. You\'ve guessed the correct Phrase';
+    startScreenOverlay.querySelector('a').textContent = 'Play Again';
     startScreenOverlay.style.display = 'flex';
+
 
   } else if (letterMissed >= 5) {
     startScreenOverlay.className = 'lose';
     heading.textContent = 'Oh no! You\'ve ran out of geusses. Press the reset button to try again';
+    startScreenOverlay.querySelector('a').textContent = 'Play Again';
     startScreenOverlay.style.display = 'flex';
   }
 }
