@@ -22,22 +22,6 @@ const phrases = ['In a pickle',
 
 // Start Game button slide left effect
 
-startGameButton.addEventListener('click', (e) =>{
-  if (startScreenOverlay.className = 'start'){
-    startGameButton.style.opacity = '0';
-    startScreenOverlayHeading.style.opacity = '0'
-    setTimeout(function(){
-      startScreenOverlay.style.height = '0vh';; }
-      , 500);
-  }
-  else if (startScreenOverlay.className = 'lose') {
-    startGameButton.style.opacity = '1';
-    startScreenOverlayHeading.style.opacity = '1'
-    setTimeout(function(){
-      startScreenOverlay.style.height = '100vh'; }
-      , 500);
-  }
-});
 
 // function that Generats a random phrase and then splits the lettes randomly
 const getRandomPhraseAsArray  = (arr) =>{
@@ -79,7 +63,11 @@ const checkLetter = (button) =>{
     if (letter[i].textContent.toUpperCase() === button.textContent.toUpperCase() ){
       matchFound = letter[i];
       matchFound.classList.add('show');
+			if(matchFound.className === 'show'){
+				matchFound.style.boxShadow = 'inset 100px 0 0 0 #76CE82;'
+			}
     }
+
   }
   return matchFound;
 }
@@ -99,6 +87,11 @@ const checkWin = () =>{
     heading.textContent = 'Well Done. You\'ve guessed the correct Phrase';
     startGameButton.textContent = 'Play Again';
     startScreenOverlay.style.display = 'flex';
+		startScreenOverlay.style.height = '100vh';
+	  setTimeout(function(){
+	    startGameButton.style.opacity = '1';
+	    startScreenOverlayHeading.style.opacity = '1' }
+	    , 500);
 
 
   } else if (letterMissed >= 5) {
@@ -106,6 +99,11 @@ const checkWin = () =>{
     heading.textContent = 'Oh no! You\'ve ran out of guesses. Press the reset button to try again';
     startGameButton.textContent = 'Play Again';
     startScreenOverlay.style.display = 'flex';
+		startScreenOverlay.style.height = '100vh';
+	  setTimeout(function(){
+	    startGameButton.style.opacity = '1';
+	    startScreenOverlayHeading.style.opacity = '1' }
+	    , 500);
   }
   reset();
 }
@@ -158,4 +156,15 @@ keyboardContainer.addEventListener('click', (e) => {
     }
   }
   checkWin();
+});
+
+
+startGameButton.addEventListener('click', (e) =>{
+  if (startScreenOverlay.className = 'start'){
+    startGameButton.style.opacity = '0';
+    startScreenOverlayHeading.style.opacity = '0'
+    setTimeout(function(){
+      startScreenOverlay.style.height = '0vh'; }
+      , 500);
+  }
 });

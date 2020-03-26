@@ -94,7 +94,11 @@ button {
 
 .show {
   color: #000;
-  background-color: #76CE82;
+  background:#76CE82;
+  transition-property: background;
+	-webkit-transition: all ease 0.8s;
+	-moz-transition: all ease 0.8s;
+	transition: all ease 0.8s;
 }
 
 /* Keyboard */
