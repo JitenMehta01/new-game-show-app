@@ -85,7 +85,7 @@ button {
   margin-right: 2px;
   color: transparent;
   background: var(--color-neutral-light);
-  border-radius: 5px;
+  overflow:hidden;
 }
 
 .space {
@@ -99,7 +99,98 @@ button {
 	-webkit-transition: all ease 0.8s;
 	-moz-transition: all ease 0.8s;
 	transition: all ease 0.8s;
+  position: relative;
 }
+
+#phrase ul {
+  overflow: hidden;
+}
+
+/* border transition effect for revealed letters in phrase ***/
+
+
+
+.bar {
+	position: absolute;
+	width: 15px;
+	height: 2px;
+	background: cadetblue;
+	transition: all 1s linear;
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+}
+.bar.delay {
+	animation-delay: 0.5s;
+	-webkit-animation-delay: 0.5s;
+}
+.top {
+	top: 0;
+	left: -5px;
+}
+.right {
+	top: 18px;
+	right: -6px;
+	transform: rotate(90deg);
+}
+.bottom {
+	bottom: 0;
+	left: -5px;
+}
+.left {
+	top: 18px;
+	left: -6px;
+	transform: rotate(90deg);
+}
+ @-webkit-keyframes h-move {
+ 0% {
+left: 0;
+}
+100% {
+left: 70px;
+}
+}
+ @keyframes h-move {
+ 0% {
+left: 0;
+}
+100% {
+left: 70px;
+}
+}
+.top, .bottom {
+	-webkit-animation-name: h-move;
+	animation-name: h-move;
+}
+ @-webkit-keyframes v-move {
+0% {
+top: 0;
+}
+100% {
+top:81px;
+}
+}
+ @keyframes v-move {
+ 0% {
+top: 0;
+}
+100% {
+top:81px;
+}
+}
+.right, .left {
+	-webkit-animation-name: v-move;
+	animation-name: v-move;
+}
+
+
+
+
+
+
 
 /* Keyboard */
 

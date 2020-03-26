@@ -10,7 +10,6 @@ const startGameButton = document.querySelector('#overlay a');
 
 
 // array of phrases
-
 const phrases = ['In a pickle',
 'Silence is golden',
 'On the edge of your seat',
@@ -20,19 +19,15 @@ const phrases = ['In a pickle',
 
 
 
-// Start Game button slide left effect
-
 
 // function that Generats a random phrase and then splits the lettes randomly
 const getRandomPhraseAsArray  = (arr) =>{
-const randomNum = (Math.floor(Math.random() * phrases.length));
+const randomNum = (Math.floor(Math.random() * arr.length));
 return arr[randomNum].split('');
 
 }
 
 // function that appends the characters of a phrase as a list item in a UL
-
-
 const addPhraseToDisplay = (arr) => {
 	const phrase = getRandomPhraseAsArray(phrases);
 	for (let i = 0; i < arr.length; i++) {
@@ -52,8 +47,8 @@ const addPhraseToDisplay = (arr) => {
 const randomPhrase = getRandomPhraseAsArray(phrases);
 addPhraseToDisplay(randomPhrase);
 
-// Checkletter function
 
+// Checkletter function
 // This function checks if the textContent of the keyboard letters is the same as the letters in the phrase
 
 const checkLetter = (button) =>{
@@ -63,6 +58,25 @@ const checkLetter = (button) =>{
     if (letter[i].textContent.toUpperCase() === button.textContent.toUpperCase() ){
       matchFound = letter[i];
       matchFound.classList.add('show');
+
+
+			for (let i =0; i <= 3; i++){ // this generates 4 divs and adds classes to each div depending on its index
+				const div = document.createElement('div');
+				matchFound.appendChild(div);
+				if (i === 0){
+					div.className = 'bar top';
+				}
+				else if (i === 1){
+					div.className = 'bar right delay';
+				}
+				else if (i === 2){
+					div.className = 'bar bottom delay';
+				}
+				else{
+					div.className = 'bar left';
+				}
+			}
+
 			if(matchFound.className === 'show'){
 				matchFound.style.boxShadow = 'inset 100px 0 0 0 #76CE82;'
 			}
@@ -73,9 +87,9 @@ const checkLetter = (button) =>{
 }
 
 
-// Event listener for the display keyboard. This calls the checkletter function
-
-
+// This function checks whether the player has won or lost
+// in each if statement there is a DOM manipulation to the overaly
+// this also calls the reset function
 
 const checkWin = () =>{
   const letter = document.querySelectorAll('.letter');
@@ -92,6 +106,7 @@ const checkWin = () =>{
 	    startGameButton.style.opacity = '1';
 	    startScreenOverlayHeading.style.opacity = '1' }
 	    , 500);
+		phraseUL.style.opacity = '0';
 
 
   } else if (letterMissed >= 5) {
@@ -104,13 +119,27 @@ const checkWin = () =>{
 	    startGameButton.style.opacity = '1';
 	    startScreenOverlayHeading.style.opacity = '1' }
 	    , 500);
+		phraseUL.style.opacity = '0';
   }
   reset();
 }
 
+
+// This animates the start of the overlay.
+// The win and lose overlay's transitions can be found in the checkWin function.
+
+startGameButton.addEventListener('click', (e) =>{
+  if (startScreenOverlay.className = 'start'){
+    startGameButton.style.opacity = '0';
+    startScreenOverlayHeading.style.opacity = '0'
+    setTimeout(function(){
+      startScreenOverlay.style.height = '0vh'; }
+      , 500);
+  }
+});
+
+
 // rest the Game
-
-
 const reset = () =>{
   startScreenOverlay.addEventListener('click', (e) => {
       if (e.target.textContent === 'Play Again'){
@@ -132,11 +161,13 @@ const reset = () =>{
           keys[i].disabled = '';
         }
         startScreenOverlay.className = '';
-
+				phraseUL.style.opacity = '1';
       }
   });
 }
 
+
+// Event Listener for the keyboard buttons
 keyboardContainer.addEventListener('click', (e) => {
   const button = e.target
   if (button.tagName === 'BUTTON') {
@@ -156,15 +187,4 @@ keyboardContainer.addEventListener('click', (e) => {
     }
   }
   checkWin();
-});
-
-
-startGameButton.addEventListener('click', (e) =>{
-  if (startScreenOverlay.className = 'start'){
-    startGameButton.style.opacity = '0';
-    startScreenOverlayHeading.style.opacity = '0'
-    setTimeout(function(){
-      startScreenOverlay.style.height = '0vh'; }
-      , 500);
-  }
 });
